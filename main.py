@@ -1,13 +1,15 @@
 # imports
+import datetime
 import random as rnd
 import wave
+import time
 
 import matplotlib.pyplot as plt
 import numpy as np
 from playsound import playsound
 from scipy.io.wavfile import write
 
-rnd.seed(1785965875)
+rnd.seed(time.time() + 123451)
 
 
 def Transform(path: str):
