@@ -22,7 +22,7 @@ def Transform(path: str):
     new_signal = [np.add(np_signal[x], (rnd.random() * 300)) for x in range(len(np_signal))]
     randomlist = []
     for i in range(0, 9999):
-        n = rnd.randint(1, 50)
+        n = rnd.randint(1, 55)
     randomlist.append(n)
     new_signal = np.convolve(new_signal, n)  # [10, 4, 16, 4, 10, 30, 30, 2, 5, 5, 5, 5]
 
