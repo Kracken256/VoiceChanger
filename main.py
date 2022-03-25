@@ -17,16 +17,15 @@ def Transform(path: str):
     signal = raw.readframes(-1)
     np_signal = np.frombuffer(signal, dtype="int16")
     f_rate = raw.getframerate()
-    np_signal = [np.add(np_signal[x], -10000) for x in range(len(np_signal))]
 
-    new_signal = [np.add(np_signal[x], (rnd.random() * 300)) for x in range(len(np_signal))]
+    new_signal = [np.add(np_signal[x], (rnd.random() * 100)) for x in range(len(np_signal))]
     randomlist = []
-    for i in range(0, 9999):
-        n = rnd.randint(1, 55)
+    for i in range(0, 999):
+        n = rnd.randint(1, 5)
     randomlist.append(n)
     new_signal = np.convolve(new_signal, n)  # [10, 4, 16, 4, 10, 30, 30, 2, 5, 5, 5, 5]
 
-    new_signal = [np.add(new_signal[x], (rnd.random() * 300)) for x in range(len(new_signal))]
+    new_signal = [np.add(new_signal[x], (rnd.random() * 100)) for x in range(len(new_signal))]
     # new_signal = gaussian_filter(new_signal, sigma=1)
 
     return new_signal, f_rate
@@ -68,9 +67,8 @@ def visualize(signal, f_rate):
 
 
 def Disguise():
-    signal, f_rate = Transform("test.wav")  # change test.wav to the file you want to process.
+    signal, f_rate = Transform("Recording.wav")  # change test.wav to the file you want to process.
     fn = SaveSound(signal, f_rate, "output.mp3")  # Save output file as output.mp3
-    PlaySound(fn)
     visualize(signal, f_rate)
 
 
