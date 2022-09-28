@@ -1,13 +1,19 @@
+#!/usr/bin/python3
+
 # imports
-import datetime
 import random as rnd
 import wave
 import time
-
+import sys
 import matplotlib.pyplot as plt
 import numpy as np
 from playsound import playsound
 from scipy.io.wavfile import write
+
+if len(sys.argv) == 1:
+    print("Must specify encoding level. Like between 10 and 70. But it is somewhat random so try different values. Like: 10,20,30,35,32.")
+    exit(1)
+level = int(sys.argv[1])
 
 rnd.seed(time.time() + 123451)
 
@@ -20,9 +26,9 @@ def Transform(path: str):
 
     new_signal = [np.add(np_signal[x], (rnd.random() * 100)) for x in range(len(np_signal))]
     randomlist = []
-    for i in range(0, 999):
-        n = rnd.randint(1, 5)
-    randomlist.append(n)
+    for i in range(0, 99):
+        n = rnd.randint(level // 8, level)
+        randomlist.append(n)
     new_signal = np.convolve(new_signal, n)  # [10, 4, 16, 4, 10, 30, 30, 2, 5, 5, 5, 5]
 
     new_signal = [np.add(new_signal[x], (rnd.random() * 100)) for x in range(len(new_signal))]
@@ -67,9 +73,9 @@ def visualize(signal, f_rate):
 
 
 def Disguise():
-    signal, f_rate = Transform("Recording.wav")  # change test.wav to the file you want to process.
-    fn = SaveSound(signal, f_rate, "output.mp3")  # Save output file as output.mp3
-    visualize(signal, f_rate)
+    signal, f_rate = Transform("test.wav")  # change test.wav to the file you want to process.
+    fn = SaveSound(signal, f_rate, "output.wav")  # Save output file as output.wav
+    #visualize(signal, f_rate)
 
 
 if __name__ == "__main__":
