@@ -80,3 +80,6 @@ def Disguise():
 
 if __name__ == "__main__":
     Disguise()
+    i = input("Do you want to play the output y/N: ")
+    if i == "yes" or i == "y":
+        PlaySound("output.wav")
